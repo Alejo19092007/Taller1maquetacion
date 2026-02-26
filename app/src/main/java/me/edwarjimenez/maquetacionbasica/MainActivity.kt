@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,7 +53,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showSystemUi = true)
+//@Preview(showSystemUi = true)
 @Composable
 fun ProductDetailScreen() {
     val purple = Color(0xFF6650A4)
@@ -141,5 +142,56 @@ fun ProductDetailScreen() {
                 Text("Eliminar")
             }
         }
+    }
+}
+@Preview(showSystemUi = true)
+@Composable
+fun ArticleScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
+        // Imagen ocupa ancho completo
+        Image(
+            painter = painterResource(id = R.drawable.jetpack),
+            contentDescription = "Imagen del artículo",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+        )
+
+        // Título
+        Text(
+            text = "Jetpack Compose tutorial",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
+        )
+
+        // Primer párrafo
+        Text(
+            text = "Jetpack Compose is a modern toolkit for building native Android UI. Compose simplifies and " +
+                    "accelerates UI development on Android with less code, powerful tools, and intuitive Kotlin APIs.",
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Segundo párrafo
+        Text(
+            text = "In this tutorial, you build a simple UI component with declarative functions. You call Compose " +
+                    "functions to say what elements you want and the Compose compiler does the rest. Compose is built " +
+                    "around Composable functions. These functions let you define your app's UI programmatically because " +
+                    "they let you describe how it should look and provide data dependencies, rather than focus on the " +
+                    "process of the UI's construction, such as initializing an element and then attaching it to a parent. " +
+                    "To create a Composable function, you add the @Composable annotation to the function name.",
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Justify,
+            modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
+        )
     }
 }
