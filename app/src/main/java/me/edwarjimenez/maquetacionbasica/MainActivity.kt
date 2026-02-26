@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-//@Preview(showSystemUi = true)
+@Preview(showSystemUi = true)
 @Composable
 fun ProductDetailScreen() {
     val purple = Color(0xFF6650A4)
@@ -153,7 +153,7 @@ fun ProductDetailScreen() {
         }
     }
 }
-//@Preview(showSystemUi = true)
+@Preview(showSystemUi = true)
 @Composable
 fun ArticleScreen() {
     Column(
