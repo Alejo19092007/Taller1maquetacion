@@ -4,10 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,17 +20,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -144,7 +153,7 @@ fun ProductDetailScreen() {
         }
     }
 }
-@Preview(showSystemUi = true)
+//@Preview(showSystemUi = true)
 @Composable
 fun ArticleScreen() {
     Column(
@@ -193,5 +202,183 @@ fun ArticleScreen() {
             textAlign = TextAlign.Justify,
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
         )
+    }
+}
+@Preview(showSystemUi = true, name = "PantallaPerfil")
+@Composable
+fun ProfileScreen() {
+    val purple = Color(0xFF6650A4)
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Image(
+            painter = painterResource(id = R.drawable.ciclacirculo),
+            contentDescription = "Foto de perfil",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .size(100.dp)
+                .clip(CircleShape)
+                .border(2.dp, purple, CircleShape)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+
+        Text(
+            text = "Alejandro Jimenez",
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+        )
+
+        // Bio
+        Text(
+            text = "Desarrollador Android apasionado por la tecnología y el diseño.",
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            StatItem(value = "150", label = "Posts")
+            StatItem(value = "2.3K", label = "Seguidores")
+            StatItem(value = "980", label = "Likes")
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Button(
+                onClick = {},
+                colors = ButtonDefaults.buttonColors(containerColor = purple),
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Seguir")
+            }
+            OutlinedButton(
+                onClick = {},
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Mensaje", color = purple)
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+
+        Text(
+            text = "Intereses",
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            modifier = Modifier.align(Alignment.Start)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+
+        val interests = listOf("Ciclismo", "Programación", "UI/UX", "Música", "Viajes", "Gaming")
+        Column {
+            interests.chunked(3).forEach { rowItems ->
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    rowItems.forEach { interest ->
+                        Box(
+                            modifier = Modifier
+                                .border(1.dp, Color.Gray, RoundedCornerShape(50))
+                                .padding(horizontal = 12.dp, vertical = 6.dp)
+                        ) {
+                            Text(
+                                text = interest,
+                                fontSize = 14.sp,
+                                color = Color.DarkGray
+                            )
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(4.dp))
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+
+        Text(
+            text = "Proyectos Recientes",
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp,
+            modifier = Modifier.align(Alignment.Start)
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            elevation = CardDefaults.cardElevation(4.dp)
+        ) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Image(
+                    painter = painterResource(id = R.drawable.rectangular),
+                    contentDescription = "Proyecto",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clip(RoundedCornerShape(topStart = 8.dp, bottomStart = 8.dp))
+                )
+                Column(
+                    modifier = Modifier
+                        .padding(12.dp)
+                        .weight(1f)
+                ) {
+                    Text(
+                        text = "App de Ciclismo",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                    Text(
+                        text = "Aplicación para rastrear rutas de ciclismo con mapas y estadísticas.",
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(
+                        onClick = {},
+                        colors = ButtonDefaults.buttonColors(containerColor = purple),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                        modifier = Modifier.align(Alignment.End)
+                    ) {
+                        Text("Ver más", fontSize = 12.sp)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// estadísticas
+
+
+@Composable
+fun StatItem(value: String, label: String) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(text = value, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+        Text(text = label, style = MaterialTheme.typography.bodySmall)
     }
 }
